@@ -20,13 +20,13 @@ export const Container = styled.div`
         width: 30px;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
 
         gap: 8px;
         
         > h1 {
             /* font-size: ${(props) => props.fontSize ?? '42px' }; */
-            font-size: 16px;
+            font-size: 20px;
         }
 
         > img {

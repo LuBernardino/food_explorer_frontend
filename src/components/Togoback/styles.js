@@ -10,7 +10,7 @@ export const Container = styled.span`
     gap: 8px;
     cursor: pointer;
 
-    @media (max-width: 650px) {
+    @media (max-width: 768px) {
         margin: 32px 10px;
     }
 

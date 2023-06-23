@@ -37,8 +37,4 @@ export const Container = styled.div`
     > svg {
         margin-left: 100px;
     }
-
-    @media (max-width: 600px) {
-        display: none;
-    }
 `;

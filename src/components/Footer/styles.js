@@ -4,8 +4,7 @@ export const Container = styled.footer`
     width: 100%;
     height: 77px;
     padding: 28px 100px;
-    background-color: peru;
-    /* background-color: ${({ theme }) => theme.colors.dark_600}; */
+    background-color: ${({ theme }) => theme.colors.dark_600};
     color: ${({ theme }) => theme.colors.light_700};
 
     display: flex;

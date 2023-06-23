@@ -39,7 +39,7 @@ export const Container = styled.button`
         background: ${({ theme }) => theme.colors.dark_900};
         width: 172px;
 
-        @media (max-width: 650px) {
+        @media (max-width: 768px) {
 
             &.dark {
                 width: 100%;
@@ -51,7 +51,7 @@ export const Container = styled.button`
         border: 1px solid ${({ theme }) => theme.colors.light_100};
     }
 
-    @media (max-width: 650px) {
+    @media (max-width: 768px) {
 
         &:disabled {
             width: 100%;
