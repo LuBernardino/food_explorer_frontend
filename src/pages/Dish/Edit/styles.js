@@ -34,6 +34,15 @@ export const Ingredient = styled.div`
     flex-direction: row;
     gap: 32px;
 
+    .add-new-ingredients {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 32px;
+        width: 100%;
+    }
+
     @media (max-width: 650px) {
         flex-direction: column;
         gap: 12px;

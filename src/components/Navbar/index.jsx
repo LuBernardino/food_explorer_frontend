@@ -16,7 +16,6 @@ export function Navbar() {
 
     const [search, setSearch] = useState("");
     const [tagsSelected, setTagsSelected] = useState([]);
-    const [windowSize, setWindowSize] = useState()
     const [showMenu, setShowMenu] = useState(true);
 
     const navigate = useNavigate();

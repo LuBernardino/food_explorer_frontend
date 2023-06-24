@@ -1,14 +1,16 @@
 import { Container } from './styles';
 
-export function Input({ id, icon, title, ...rest }) {
+export function Dropdown({ id, icon, title, options, ...rest }) {
     return(
         <Container>
             <label htmlFor={id}>{title}</label>
             { icon && <img src={icon}/>}
-            <input 
+            <select 
                 id={id}
                 {...rest} 
-            />
+            >
+                {options.map(opt => (<option value={opt.id}>{opt.title}</option>))}
+            </select>
         </Container>
     )
 }

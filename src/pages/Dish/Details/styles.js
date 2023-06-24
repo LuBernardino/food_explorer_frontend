@@ -17,7 +17,7 @@ export const Main = styled.div`
     justify-content: center;
     align-items: center;
     margin-bottom: 55px;
-    margin: 42px 0 35px 0;
+    margin: 10px 0 35px 0;
 
     > img {
         height: 390px;
@@ -44,7 +44,27 @@ export const Main = styled.div`
 
     @media (max-width: 768px) {
         flex-direction: column;
+        text-align: center;
+        margin: 0 0 20px 0;
         padding: 16px 56px;
+        gap: 16px;
+
+        > img {
+            height: 264px;
+            width: 264px;
+        }
+
+        .dishinfo {
+
+            h1 {
+                font-size: 27px;
+            }
+    
+            p {
+                font-size: 16px;
+            }
+        }
+        
     }
 `;
 
@@ -54,23 +74,24 @@ export const Tags = styled.div`
     @media (max-width: 768px) {
         flex-direction: row;
         flex-wrap: wrap;
-        gap: 24px;
+        gap: 16px;
         justify-content: center;
     }
 `;
 
 export const Items = styled.div`
     display: flex;
-    gap: 33px;
+    gap: 32px;
     width: 320px;
 
     @media (max-width: 768px) {
+
         > Count {
             display: none;
         }
 
         > Button {
-            margin-top: 32px;
+            /* margin-top: 32px; */
         }
     }
 `;

@@ -16,13 +16,12 @@ export const Container = styled.div`
         background-color: ${({ theme }) => theme.colors.dark_900};
         color: ${({ theme }) => theme.colors.light_100};
         width: 100%;
-        height: 170px;
         border: none;
         border-radius: 8px;
-        padding: 14px;
-        margin-top: 16px;
+        padding: 16px 16px 150px 16px;
         font-family: 'Roboto', sans-serif;
         border:  ${(props) => props.$border ? `1px solid ${props.theme.colors.light_100}` : `none`};
+        margin-top: 16px;
         margin-bottom: 32px;
 
         &:focus {

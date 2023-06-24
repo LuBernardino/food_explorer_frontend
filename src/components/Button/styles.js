@@ -28,7 +28,7 @@ export const Container = styled.button`
     
     &:disabled {
         background: ${({ theme }) => theme.colors.tomato_400};
-        width: 172px;
+        width: ${(prop) => prop.width ? prop.width : '172px' };
     }
 
     &:disabled:hover {
@@ -37,7 +37,7 @@ export const Container = styled.button`
     
     &.dark {
         background: ${({ theme }) => theme.colors.dark_900};
-        width: 172px;
+        width: ${(prop) => prop.width ? prop.width : '172px' };
 
         @media (max-width: 768px) {
 
@@ -48,7 +48,7 @@ export const Container = styled.button`
     }
 
     &.dark:hover {
-        border: 1px solid ${({ theme }) => theme.colors.light_100};
+        /* border: 1px solid ${({ theme }) => theme.colors.light_100}; */
     }
 
     @media (max-width: 768px) {

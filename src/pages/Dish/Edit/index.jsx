@@ -8,13 +8,34 @@ import { Input } from "../../../components/Input";
 import { Button } from "../../../components/Button";
 import { Footer } from "../../../components/footer";
 import { Navbar } from "../../../components/navbar";
+import { Dropdown } from "../../../components/Dropdown";
+import { AddIngredients } from "../../../components/AddIngredients";
+
+
 import { Tag } from "../../../components/tag";
 import { Container, Main, Dish, Ingredient, Buttons } from './styles';
 import { Count } from "../../../components/Count";
 import { TogoBack } from "../../../components/togoback";
 import { Textarea } from "../../../components/Textarea";
+import { ButtonUploadFile } from "../../../components/ButtonUploadFile";
+import UploadSimple from '../../../assets/svg/UploadSimple.svg';
+
 
 export function DishEdit() {
+
+    const categories = [{
+        id: 1,
+        title: 'Refeição'
+    },
+    {
+        id: 2,
+        title: 'Sobremesas',
+    },
+    {
+        id: 3,
+        title: 'Bebidas',
+    }]
+
   return (
       <Container>
         <Navbar />
@@ -25,29 +46,29 @@ export function DishEdit() {
 
             <h1>Editar prato</h1>
             <Dish>
-                <Input
 
-                    title='Imagem do Prato'
-                    placeholder='Selecione imagem'
-                />
+                <ButtonUploadFile icon={UploadSimple} width="229px" title='Imagem do Prato'/>
+
+    
                 <Input
 
                     title='Nome'
                     placeholder='Ex: Salada Ceasar'
                 />
-                <Input
-
+                <Dropdown
+                    options={categories}
                     title='Categoria'
                     placeholder='Refeição'
                 />
             </Dish>
 
             <Ingredient>
-                <Input
+                <div className="add-new-ingredients">
+                    <h1>Ingredientes</h1>
+                    <AddIngredients/>
 
-                    title='Ingredientes'
-                    // placeholder='Selecione imagem'
-                />
+                </div>
+
                 <Input
 
                     title='Preço'

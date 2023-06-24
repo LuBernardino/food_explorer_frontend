@@ -27,7 +27,6 @@ export const Container = styled.div`
         /* height: 100vh; */
         border-radius: 12px;
         background-color: ${({ theme }) => theme.colors.tomato_200};
-
         height: 0;
         opacity: 0;
         transition: 0.5s;
@@ -35,7 +34,8 @@ export const Container = styled.div`
     }
 
     .menu.active {
-        height: 195px;
+        /* height: 100vh; */
+        height: 500px;
         opacity: 1;
         transition: 0.5s;
         visibility: visible;
@@ -55,7 +55,8 @@ export const Container = styled.div`
         }
 
         .search-menu {
-            display: none;
+            /* display: none; */
+            background-color: skyblue;
         }
 
         .requests {

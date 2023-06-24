@@ -5,7 +5,7 @@ import { Card } from '../../components/Card';
 import { Container } from './styles';
 import FlavorImage from '../../assets/svg/flavorimage.svg'
 import DishParma from '../../assets/svg/DishParma.svg';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -16,9 +16,11 @@ import { Navigation } from "swiper";
 
 export function Home() {
     const sections = ['Refeições', 'Sobremesas', 'Bebidas'];
+    const slidesPerView = 4;
+    const [isMobile, setIsMobile] = useState(false);
 
     const data = [
-        { id: 1, image: DishParma, title: 'Teste 1', description: 'Teste Teste', value: 10, favorite: false },
+        { id: 1, image: DishParma, title: 'Suco de Maracuja', description: 'Teste Teste', value: 10, favorite: false },
         { id: 2, image: DishParma, title: 'Teste 2', description: 'Teste Teste', value: 10, favorite: false },
         { id: 3, image: DishParma, title: 'Teste 3', description: 'Teste Teste', value: 10, favorite: true },
         { id: 4, image: DishParma, title: 'Teste 4', description: 'Teste Teste', value: 10, favorite: false },
@@ -35,7 +37,18 @@ export function Home() {
         { id: 15, image: DishParma, title: 'Teste 15', description: 'Teste Teste', value: 10, favorite: true },
     ];
 
-    const slidesPerView = 4;
+
+    useEffect(() => {
+        function handleResize() {
+            setIsMobile(window.innerWidth <= 768);
+        }
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [])
 
     return(
         <Container>
@@ -50,10 +63,10 @@ export function Home() {
                         <div className='cards'>
                             {/* <RxCaretLeft onClick={handlePrevious}/> */}
                             <Swiper
-                                slidesPerView={slidesPerView}
-                                spaceBetween={27}
+                                slidesPerView={isMobile ? 1.5 : 4}
+                                spaceBetween={isMobile ? 16 : 27}
                                 freeMode={true}
-                                navigation={true}
+                                navigation={!isMobile}
                                 loop={true}
                                 modules={[Navigation]}
                                 className="mySwiper"
@@ -64,7 +77,7 @@ export function Home() {
                             >
                                 {data.map(item => 
                                     <SwiperSlide key={item.id}>
-                                        <Card dish={item}/>
+                                        <Card dish={item} isMobile={isMobile}/>
                                     </SwiperSlide>
                                 )}
                             </Swiper>

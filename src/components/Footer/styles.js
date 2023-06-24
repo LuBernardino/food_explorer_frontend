@@ -18,16 +18,12 @@ export const Container = styled.footer`
         color: ${({ theme }) => theme.colors.light_200};
     }
     
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
         padding: 20px;
         align-items: center;
         
         > p {
-            font-size: 12px;            
+            font-size: 10px;
         }
     }
-
-    /* @media (min-width: 1440px) {
-        position: fixed;
-    } */
 `;

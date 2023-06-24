@@ -23,8 +23,17 @@ export const Main = styled.div`
 export const Dish = styled.div`
     display: flex;
     gap: 32px;
+    flex-direction: row;
+    justify-content: space-between;
+    > label {
+        width: 100%;
+    }
 
-    @media (max-width: 650px) {
+    #image-upload {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
         flex-direction: column;
         gap: 12px;
     }
@@ -35,7 +44,16 @@ export const Ingredient = styled.div`
     flex-direction: row;
     gap: 32px;
 
-    @media (max-width: 650px) {
+    .add-new-ingredients {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 32px;
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
         flex-direction: column;
         gap: 12px;
     }
@@ -48,7 +66,7 @@ export const Buttons = styled.div`
     gap: 32px;
     margin-bottom: 64px;
 
-    @media (max-width: 650px) {
+    @media (max-width: 768px) {
         justify-content: center;
     }
 `;

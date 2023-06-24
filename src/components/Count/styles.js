@@ -26,7 +26,10 @@ export const Container = styled.span`
         color: ${({ theme }) => theme.colors.light_300};
     }
 
-    @media (max-width: 650px) {
-        display: none;
+    @media (max-width: 768px) {
+              
+        > h1 {
+        font-size: 16px;
+       } 
     }
 `;

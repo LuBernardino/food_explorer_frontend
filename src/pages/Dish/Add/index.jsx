@@ -2,11 +2,13 @@
 // import { Link } from 'react-router-dom';
 // import { useParams } from "react-router-dom";
 // import { useNavigate } from 'react-router-dom';
-import { useState,useEffect } from "react";
-// import { Container } from "./styles";
+import { useState, useEffect, useRef } from "react";
 import { Input } from "../../../components/Input";
-// import { AddTags } from "../../../components/AddIngredients";
+
 import { Button } from "../../../components/Button";
+import { ButtonUploadFile } from "../../../components/ButtonUploadFile";
+import { Dropdown } from "../../../components/Dropdown";
+
 import { Footer } from "../../../components/footer";
 import { Navbar } from "../../../components/navbar";
 import { Tag } from "../../../components/tag";
@@ -17,6 +19,7 @@ import { Textarea } from "../../../components/Textarea";
 
 import UploadSimple from '../../../assets/svg/UploadSimple.svg';
 import { AddIngredients } from "../../../components/AddIngredients";
+// import { Dropdown } from "../../../components/Dropdown";
 
 // // INGREDIENTS 
 // const [ingredients, setIngredients] = useState([]);
@@ -33,7 +36,21 @@ import { AddIngredients } from "../../../components/AddIngredients";
 // }
 
 export function DishAdd() {
-  return (
+
+    const categories = [{
+        id: 1,
+        title: 'Refeição'
+    },
+    {
+        id: 2,
+        title: 'Sobremesas',
+    },
+    {
+        id: 3,
+        title: 'Bebidas',
+    }]
+
+    return (
       <Container>
         <Navbar />
 
@@ -43,30 +60,28 @@ export function DishAdd() {
 
             <h1>Adicionar prato</h1>
             <Dish>
+                
+                <ButtonUploadFile icon={UploadSimple} width="229px" title='Imagem do Prato'/>
+ 
                 <Input
-                    enabled
-                    title='Imagem do Prato'
-                    // placeholder={icon={SignOut} +  'dede'}
-                    placeholder='Selecione imagem'
-                />
-                <Input
-
+                    type='text'
                     title='Nome'
                     placeholder='Ex: Salada Ceasar'
                 />
-                <Input
 
+                <Dropdown
+                    options={categories}
                     title='Categoria'
                     placeholder='Refeição'
                 />
             </Dish>
 
             <Ingredient>
-                <Input
-                    {...<AddIngredients/>}
-                    title='Ingredientes'
-                    // placeholder='R$ 00,00'
-                />
+                <div className="add-new-ingredients">
+                    <h1>Ingredientes</h1>
+                    <AddIngredients/>
+
+                </div>
 
                 <Input
                     title='Preço'
@@ -78,8 +93,6 @@ export function DishAdd() {
                 title='Descrição'
                 placeholder='Fale brevemente sobre o prato, seus ingredientes e composição'
             />
-
-            <AddIngredients/>
 
             <Buttons>
                 <Button

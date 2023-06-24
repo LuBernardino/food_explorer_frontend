@@ -5,7 +5,7 @@ import { FiHeart } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
 import { useState, useEffect } from "react";
 
-export function Card({ dish }) {
+export function Card({ dish, isMobile }) {
 
     const [quantity, setQuantity] = useState(1);
     const [favorite, setFavorite] = useState(false);
@@ -15,7 +15,7 @@ export function Card({ dish }) {
     }
 
     return(
-        <Container>
+        <Container isMobile={isMobile}>
             { favorite ? <FaHeart onClick={handleFavorite}/> : <FiHeart onClick={handleFavorite}/> } 
             <img src={dish.image} alt='Dish Image' />
 
@@ -25,7 +25,7 @@ export function Card({ dish }) {
             
             <div className='card-footer'>
                 <Count 
-                    quantity={quantity} 
+                    quantity={quantity}
                     setQuantity={setQuantity}
                     maxQuantity={100}
                     value={1}
