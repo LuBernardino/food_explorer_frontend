@@ -9,7 +9,7 @@ export function Dropdown({ id, icon, title, options, ...rest }) {
                 id={id}
                 {...rest} 
             >
-                {options.map(opt => (<option value={opt.id}>{opt.title}</option>))}
+                {options.map(opt => (<option key={opt.id} value={opt.id}>{opt.title}</option>))}
             </select>
         </Container>
     )

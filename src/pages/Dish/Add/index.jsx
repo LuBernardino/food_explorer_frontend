@@ -18,24 +18,30 @@ import { TogoBack } from "../../../components/togoback";
 import { Textarea } from "../../../components/Textarea";
 
 import UploadSimple from '../../../assets/svg/UploadSimple.svg';
-import { AddIngredients } from "../../../components/AddIngredients";
-// import { Dropdown } from "../../../components/Dropdown";
+import { IngredientTag } from "../../../components/IngredientTag";
+
 
 // // INGREDIENTS 
-// const [ingredients, setIngredients] = useState([]);
-// const [newIngredients, setNewIngredients] = useState("");
+
 
 // //INGREDIENTS ADD AND REMOVE
-// function handleAddIngredients() {
-//     setIngredients(prevState => [...prevState, newIngredients]);
-//     setNewIngredients("");
-// }
 
-// function handleRemoveIngredients(deleted) {
-//     setIngredients(prevState => prevState.filter(ingredients => ingredients !== deleted));
-// }
+
+
 
 export function DishAdd() {
+
+    const [ingredients, setIngredients] = useState(['Cebola','Alface', 'Pimenta']);
+    const [newIngredient, setNewIngredient] = useState("");
+
+    function handleAddIngredients() {
+        setIngredients(prevState => [...prevState, newIngredient]);
+        setNewIngredient("");
+    }
+
+    function handleRemoveIngredients(deleted) {
+        setIngredients(prevState => prevState.filter(ingredient => ingredient !== deleted));
+    }
 
     const categories = [{
         id: 1,
@@ -49,6 +55,8 @@ export function DishAdd() {
         id: 3,
         title: 'Bebidas',
     }]
+
+
 
     return (
       <Container>
@@ -76,14 +84,28 @@ export function DishAdd() {
                 />
             </Dish>
 
+
             <Ingredient>
                 <div className="add-new-ingredients">
                     <h1>Ingredientes</h1>
-                    <AddIngredients/>
-
+                    <div className="ingredients">
+                        {
+                            ingredients.map((ingredient, index) => 
+                                (<IngredientTag 
+                                    key={index} 
+                                    value={ingredient} 
+                                    isNew={false} 
+                                    onClick={() => handleRemoveIngredients(ingredient)} />)
+                            )
+                        }
+                        <IngredientTag isNew={true} 
+                            value={newIngredient}
+                            onClick={handleAddIngredients} 
+                            onChange={e => setNewIngredient(e.target.value)}/>
+                    </div>
                 </div>
 
-                <Input
+                <Input 
                     title='Preço'
                     placeholder='R$ 00,00'
                 />

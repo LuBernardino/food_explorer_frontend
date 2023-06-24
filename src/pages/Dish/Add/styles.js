@@ -51,6 +51,18 @@ export const Ingredient = styled.div`
         gap: 16px;
         margin-top: 32px;
         width: 100%;
+
+        .ingredients {
+            background-color: ${({ theme }) => theme.colors.dark_900};
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            min-height: 48px;
+            gap: 16px;
+            border-radius: 8px;
+            padding: 10px;
+            width: 100%;
+        }
     }
 
     @media (max-width: 768px) {

@@ -1,26 +1,23 @@
 
 import { FiX, FiPlus } from 'react-icons/fi';
-import { Container, Main } from './styles';
+import { Container } from './styles';
 import { Input } from '../Input';
 
-export function AddIngredients({ title, isNew = false, onClick, ...rest }) {
+export function IngredientTag({ value, isNew = false, onClick, ...rest }) {
   return (
     <Container isNew={isNew}>
-
-      <Main>
         <label>
           <input
             type="text"
+            value={value}
             readOnly={!isNew}
             placeholder="Adicionar"
             {...rest}
           />
           <button type="button" onClick={onClick}>
-            {!isNew ? <FiPlus /> : <FiX />}
+            {isNew ? <FiPlus /> : <FiX />}
           </button>
         </label>
-
-      </Main>
     </Container>
   );
 }

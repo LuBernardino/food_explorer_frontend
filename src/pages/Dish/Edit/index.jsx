@@ -9,7 +9,7 @@ import { Button } from "../../../components/Button";
 import { Footer } from "../../../components/footer";
 import { Navbar } from "../../../components/navbar";
 import { Dropdown } from "../../../components/Dropdown";
-import { AddIngredients } from "../../../components/AddIngredients";
+import { IngredientTag } from "../../../components/IngredientTag";
 
 
 import { Tag } from "../../../components/tag";
@@ -62,10 +62,10 @@ export function DishEdit() {
                 />
             </Dish>
 
-            <Ingredient>
+            {/* <Ingredient>
                 <div className="add-new-ingredients">
                     <h1>Ingredientes</h1>
-                    <AddIngredients/>
+                    <IngredientTag/>
 
                 </div>
 
@@ -74,7 +74,7 @@ export function DishEdit() {
                     title='Preço'
                     placeholder='R$ 00,00'
                 />
-            </Ingredient>
+            </Ingredient> */}
 
             <Textarea 
                 title='Descrição'
