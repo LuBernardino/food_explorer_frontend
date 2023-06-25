@@ -94,6 +94,8 @@ export const Container = styled.div`
                 border-bottom: 2px solid ${({ theme }) => theme.colors.dark_1000};
                 padding: 36px 28px 10px 28px;
                 margin: 0 28px;
+                color: ${({ theme }) => theme.colors.light_100};
+                cursor: pointer;
             }
 
             header {

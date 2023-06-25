@@ -75,7 +75,9 @@ export function Navbar() {
                     onChange={(e) => setSearch(e.target.value)}
                 />
 
-                <h2>Sair</h2>
+                <Link to='/'>
+                    <h2>Sair</h2>
+                </Link>
 
             </div>
 
