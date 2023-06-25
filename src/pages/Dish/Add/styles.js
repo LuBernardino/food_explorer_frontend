@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    /* > Input {
-        
-    } */
 `;
 
 export const Main = styled.div`
@@ -15,7 +12,7 @@ export const Main = styled.div`
         font-weight: 500;
     }
 
-    @media (max-width: 650px) {
+    @media (max-width: 768px) {
         margin: 0 32px;
     }
 `;
@@ -50,7 +47,7 @@ export const Ingredient = styled.div`
         justify-content: center;
         gap: 16px;
         margin-top: 32px;
-        width: 100%;
+        width: 150%;
 
         .ingredients {
             background-color: ${({ theme }) => theme.colors.dark_900};
@@ -68,6 +65,10 @@ export const Ingredient = styled.div`
     @media (max-width: 768px) {
         flex-direction: column;
         gap: 12px;
+
+        .add-new-ingredients {
+            width: 100%;
+        }
     }
 `;
 

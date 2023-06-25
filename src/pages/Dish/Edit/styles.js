@@ -23,7 +23,7 @@ export const Dish = styled.div`
     display: flex;
     gap: 32px;
 
-    @media (max-width: 650px) {
+    @media (max-width: 768px) {
         flex-direction: column;
         gap: 12px;
     }
@@ -40,12 +40,19 @@ export const Ingredient = styled.div`
         justify-content: center;
         gap: 16px;
         margin-top: 32px;
-        width: 100%;
-    }
+        width: 150%;
 
-    @media (max-width: 650px) {
-        flex-direction: column;
-        gap: 12px;
+        .ingredients {
+            background-color: ${({ theme }) => theme.colors.dark_900};
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            min-height: 48px;
+            gap: 16px;
+            border-radius: 8px;
+            padding: 10px;
+            width: 100%;
+        }
     }
 `;
 
