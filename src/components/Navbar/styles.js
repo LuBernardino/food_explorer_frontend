@@ -26,7 +26,7 @@ export const Container = styled.div`
     .menu {
         /* height: 100vh; */
         border-radius: 12px;
-        background-color: ${({ theme }) => theme.colors.tomato_200};
+        background-color: ${({ theme }) => theme.colors.dark_500};
         height: 0;
         opacity: 0;
         transition: 0.5s;
@@ -34,8 +34,8 @@ export const Container = styled.div`
     }
 
     .menu.active {
-        /* height: 100vh; */
-        height: 500px;
+        height: 100vh;
+        /* height: 500px; */
         opacity: 1;
         transition: 0.5s;
         visibility: visible;
@@ -56,7 +56,6 @@ export const Container = styled.div`
 
         .search-menu {
             /* display: none; */
-            background-color: skyblue;
         }
 
         .requests {
@@ -68,7 +67,6 @@ export const Container = styled.div`
                 color: ${({ theme }) => theme.colors.light_100};
                 border-radius: 50%;
                 font-size: 14px;
-                /* text-align: center; */
                 padding: 2px 6px;
                 position: absolute;
                 top: -4px;
@@ -93,14 +91,14 @@ export const Container = styled.div`
                 font-size: 24px;
                 font-family: 'Poppins', sans-serif;
                 font-weight: 400;
-                border-bottom: 1px solid ${({ theme }) => theme.colors.dark_1000};
+                border-bottom: 2px solid ${({ theme }) => theme.colors.dark_1000};
                 padding: 36px 28px 10px 28px;
                 margin: 0 28px;
             }
 
             header {
                 display: flex;
-                background-color: ${({ theme }) => theme.colors.tomato_100};
+                background-color: ${({ theme }) => theme.colors.dark_700};
                 /* background-color: ${({ theme }) => theme.colors.dark_700}; */
                 padding: 56px 28px 24px 28px;
                 gap: 16px;

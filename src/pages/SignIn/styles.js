@@ -8,7 +8,7 @@ export const Main = styled.div`
     height: 100vh;
     margin-left: 150px;
 
-    @media (max-width: 650px) {
+    @media (max-width: 768px) {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -18,10 +18,7 @@ export const Main = styled.div`
     }
 `;
 
-
 export const Container = styled.div`
-    /* max-width: 476px;
-    max-height: 621px; */
     width: 500px;
     display: flex;
     flex-direction: column;
@@ -51,7 +48,7 @@ export const Container = styled.div`
         margin-top: 32px;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
         background-color: transparent;
         padding: 70px 90px;
 
