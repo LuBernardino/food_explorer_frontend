@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { Button } from "../../../components/Button";
-import { Footer } from "../../../components/footer";
-import { Navbar } from "../../../components/navbar";
-import { Tag } from "../../../components/tag";
+import { Footer } from "../../../components/Footer";
+import { Navbar } from "../../../components/Navbar";
+import { Tag } from "../../../components/Tag";
 import { Count } from "../../../components/Count";
-import { TogoBack } from "../../../components/togoback";
+import { TogoBack } from "../../../components/Togoback";
 import { Container, Main, Tags, Items } from "./styles";
 import { useAuth } from "../../../hooks/auth";
 

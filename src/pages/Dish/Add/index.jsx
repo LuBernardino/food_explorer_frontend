@@ -11,9 +11,9 @@ import { Input } from "../../../components/Input";
 import { Button } from "../../../components/Button";
 import { ButtonUploadFile } from "../../../components/ButtonUploadFile";
 import { Dropdown } from "../../../components/Dropdown";
-import { Footer } from "../../../components/footer";
-import { Navbar } from "../../../components/navbar";
-import { TogoBack } from "../../../components/togoback";
+import { Footer } from "../../../components/Footer";
+import { Navbar } from "../../../components/Navbar";
+import { TogoBack } from "../../../components/Togoback";
 import { Textarea } from "../../../components/Textarea";
 
 import UploadSimple from "../../../assets/svg/UploadSimple.svg";
