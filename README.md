@@ -8,7 +8,7 @@
                   clicar em um prato, é redirecionado para uma página com informações detalhadas sobre o prato. O objetivo é proporcionar 
                   uma experiência completa de visualização e interação com o cardápio do restaurante.
 </p>
-<p align="center">Acesse aqui ➡️➡️➡️ https://main--effervescent-pika-0ac2d4.netlify.app/</p>
+<p align="center">Acesse aqui ➡️➡️➡️ https://food-explorer-luana.netlify.app/</p>
 <br>
 
 
