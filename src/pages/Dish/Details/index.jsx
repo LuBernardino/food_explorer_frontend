@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { Button } from "../../../components/Button";
-import { Footer } from "../../../components/Footer";
+import { Footer } from "../../../components/footer";
 import { Navbar } from "../../../components/navbar";
 import { Tag } from "../../../components/tag";
 import { Count } from "../../../components/Count";
