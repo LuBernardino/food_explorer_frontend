@@ -2,8 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     width: 50%;
-    /* background-color: transparent; */
-    /* margin-top: 32px; */
     background-color: ${({ theme }) => theme.colors.dark_900};
 
     display: flex;
@@ -23,7 +21,6 @@ export const Container = styled.div`
         width: 100%;
         border: none;
         padding: 12px 14px;
-        /* margin-top: 8px; */
         font-family: 'Roboto', sans-serif;
         border:  ${(props) => props.$border ? `1px solid ${props.theme.colors.light_100}` : `none`};
         color: ${({ theme }) => theme.colors.light_400};
@@ -36,6 +33,13 @@ export const Container = styled.div`
 
     > svg {
         margin-left: 100px;
+    }
+
+    @media (max-width: 1100px) {
+
+        > svg {
+            margin-left: 40px;
+        }
     }
 
     @media (max-width: 768px) {

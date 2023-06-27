@@ -4,7 +4,7 @@ export const Container = styled.div`
 
 `;
 
-export const Main = styled.div`
+export const Form = styled.form`
     margin: 0 90px 0 150px;
 
     > h1 {
@@ -13,7 +13,7 @@ export const Main = styled.div`
         font-weight: 500;
     }
 
-    @media (max-width: 650px) {
+    @media (max-width: 768px) {
         margin: 0 32px;
     }
 
@@ -22,6 +22,15 @@ export const Main = styled.div`
 export const Dish = styled.div`
     display: flex;
     gap: 32px;
+    flex-direction: row;
+    justify-content: space-between;
+    > label {
+        width: 100%;
+    }
+
+    #image-upload {
+        display: none;
+    }
 
     @media (max-width: 768px) {
         flex-direction: column;
@@ -54,6 +63,15 @@ export const Ingredient = styled.div`
             width: 100%;
         }
     }
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 12px;
+
+        .add-new-ingredients {
+            width: 100%;
+        }
+    }
 `;
 
 export const Buttons = styled.div`
@@ -63,9 +81,7 @@ export const Buttons = styled.div`
     gap: 32px;
     margin-bottom: 64px;
 
-    @media (max-width: 650px) {
+    @media (max-width: 768px) {
         justify-content: center;
     }
 `;
-
-// export const Description = styled.div``;

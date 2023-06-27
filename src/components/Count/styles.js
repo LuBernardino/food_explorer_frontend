@@ -21,7 +21,7 @@ export const Container = styled.span`
         
     > h1 {
         font-family: 'Roboto', sans-serif;
-        font-size: 32px;
+        font-size: 24px;
         font-weight: 700;
         color: ${({ theme }) => theme.colors.light_300};
     }

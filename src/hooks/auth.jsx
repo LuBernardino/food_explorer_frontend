@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { api } from "../services/api";
 import { toast, ToastContainer } from 'react-toastify';
-// import "react-toastify/dist/ReactToastify.css";
 
 export const AuthContext = createContext({});
 
@@ -25,6 +24,7 @@ function AuthProvider({ children }) {
             setData({ user, token });
 
         } catch(error) {
+            console.log(error)
             if(error.response) {
                 toast.error(error.response.data.message, toastOptions);
             } else {
@@ -84,7 +84,7 @@ function AuthProvider({ children }) {
     
     return(
         <AuthContext.Provider value={{ signIn, user: data.user, signOut, updateProfile }}>
-            {/* <ToastContainer /> */}
+            <ToastContainer />
             { children }
         </AuthContext.Provider>
     )

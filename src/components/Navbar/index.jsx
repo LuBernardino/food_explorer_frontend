@@ -1,110 +1,104 @@
-import { BsSearch } from 'react-icons/bs';
-import { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-// import { api } from '../../services/api';
-import { Logo } from '../Logo';
-import { Button } from '../Button';
-import { Search } from '../Search';
-import { Container } from './styles';
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/auth";
+import { Logo } from "../Logo";
+import { Button } from "../Button";
+import { Search } from "../Search";
+import { Container } from "./styles";
 
-import Menu from '../../assets/svg/Menu.svg';
-import Close from '../../assets/svg/Close.svg';
-import Receipt from '../../assets/svg/Receipt.svg';
-import SignOut from '../../assets/svg/SignOut.svg';
+import { BsSearch } from "react-icons/bs";
+import Menu from "../../assets/svg/Menu.svg";
+import Close from "../../assets/svg/Close.svg";
+import Receipt from "../../assets/svg/Receipt.svg";
+import SignOut from "../../assets/svg/SignOut.svg";
 
-export function Navbar() {
+export function Navbar({ handleSearch, cart = 0 }) {
+  const [showMenu, setShowMenu] = useState(true);
 
-    const [search, setSearch] = useState("");
-    const [tagsSelected, setTagsSelected] = useState([]);
-    const [showMenu, setShowMenu] = useState(true);
+  const { signOut, user } = useAuth();
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
-
-    // useEffect(() => {
-    //     async function fetchNotes() {
-    //         const response = await api.get(`/notes?title=${search}&tags=${tagsSelected}`);
-    //         setNotes(response.data);
-    //     }
-
-    //     fetchNotes();
-
-    // }, [tagsSelected, search]);
-
-    useEffect(() => {
-        function handleResize() {
-            setShowMenu(window.innerWidth <= 768);
-        }
-        window.addEventListener('resize', handleResize);
-        handleResize();
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, [])
-
-
-    const handleBack = () => {
-        navigate('/')
+  useEffect(() => {
+    function handleResize() {
+      setShowMenu(window.innerWidth <= 768);
     }
+    window.addEventListener("resize", handleResize);
+    handleResize();
 
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
+    return () => {
+      window.removeEventListener("resize", handleResize);
     };
+  }, []);
 
-    return(
-        <Container>
-            <img className='menu-open' src={Menu} alt="Icone de menu" onClick={toggleMenu}/>
-            <div className={`menu ${isMenuOpen ? 'active' : ''}`}>
-                <header>
-                    <img 
-                        className='menu-close' 
-                        src={Close} 
-                        alt="Icone de menu"
-                        onClick={toggleMenu}
-                    />
-                    <h1>Menu</h1>
-                </header>
+  function handleSignOut() {
+    navigate("/");
+    signOut();
+  }
 
-                <Search
-                    className='search-menu'
-                    icon={BsSearch}
-                    placeholder='Busque por pratos ou ingredientes'
-                    type='text'
-                    onChange={(e) => setSearch(e.target.value)}
-                />
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-                <Link to='/'>
-                    <h2>Sair</h2>
-                </Link>
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
-            </div>
+  return (
+    <Container>
+      <img
+        className="menu-open"
+        src={Menu}
+        alt="Icone de menu"
+        onClick={toggleMenu}
+      />
+      <div className={`menu ${isMenuOpen ? "active" : ""}`}>
+        <header>
+          <img
+            className="menu-close"
+            src={Close}
+            alt="Icone de menu"
+            onClick={toggleMenu}
+          />
+          <h1>Menu</h1>
+        </header>
 
-            <Logo 
-                fontSize='24px'
-            />
+        <Search
+          className="search-menu"
+          icon={BsSearch}
+          placeholder="Busque por pratos ou ingredientes"
+          type="text"
+          onChange={(e) => handleSearch(e.target.value)}
+        />
 
-            {!showMenu && 
-                (<Search
-                    icon={BsSearch}
-                    placeholder='Busque por pratos ou ingredientes'
-                    type='text'
-                    onChange={(e) => setSearch(e.target.value)}
-                />)
-            }
+        <Link to="/">
+          <h2>Sair</h2>
+        </Link>
+      </div>
 
-            <Button
-                icon={Receipt}
-                title='Pedidos (0)'
-            />
+      <Logo fontSize="24px" />
 
-            <Link to='/'>
-                <a className='out' href=""><img src={SignOut} alt="Icone de Sair" /></a>
-                <a className='requests' href=""><img src={Receipt} alt="Icone de Pedidos" />
-                    <p>0</p>
-                </a>
-            </Link>
-        </Container>
-    )
+      {!showMenu && (
+        <Search
+          icon={BsSearch}
+          placeholder="Busque por pratos ou ingredientes"
+          type="text"
+          onChange={(e) => handleSearch(e.target.value)}
+        />
+      )}
+
+      {user.admin ? (
+        <Button title="Novo prato" onClick={() => navigate("/dish/add")} />
+      ) : (
+        <Button icon={Receipt} title={`Pedidos (${cart})`} />
+      )}
+
+      <Link to="/">
+        <a className="out" onClick={handleSignOut}>
+          <img src={SignOut} alt="Icone de Sair" />
+        </a>
+        <a className="requests" href="">
+          <img src={Receipt} alt="Icone de Pedidos" />
+          <p>{cart}</p>
+        </a>
+      </Link>
+    </Container>
+  );
 }

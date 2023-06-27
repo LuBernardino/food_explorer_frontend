@@ -1,7 +1,6 @@
 
 import { FiX, FiPlus } from 'react-icons/fi';
 import { Container } from './styles';
-import { Input } from '../Input';
 
 export function IngredientTag({ value, isNew = false, onClick, ...rest }) {
   return (

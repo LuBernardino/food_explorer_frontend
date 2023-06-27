@@ -30,8 +30,6 @@ export const Container = styled.div`
         > svg {
             cursor: pointer;
             height: 450px;
-            /* background-color: black; */
-            /* width: 50px; */
         }
         
         > svg:first-child {
@@ -56,7 +54,7 @@ export const Container = styled.div`
             left: 0;
             bottom: 0;
             height: 110%;
-            width: 250px;
+            width: 200px;
             justify-content: left;
             padding-left: 20px;
         }
@@ -68,13 +66,13 @@ export const Container = styled.div`
             right: 0;
             bottom: 0;
             height: 110%;
-            width: 250px;
+            width: 200px;
             justify-content: right;
             padding-right: 20px;
         }
     }
 
-        @media (max-width: 650px) {
+        @media (max-width: 678px) {
 
             > img {
                 padding: 0 16px;

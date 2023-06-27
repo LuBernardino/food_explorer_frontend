@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.button`
-    width: 100%;
+    width: ${(prop) => prop.width ? prop.width : '172px' };
     background: ${({ theme }) => theme.colors.tomato_100};
     color: ${({ theme }) => theme.colors.light_100};
     font-family: 'Poppins', sans-serif;
@@ -10,8 +10,6 @@ export const Container = styled.button`
     height: 48px;
     border: 0;
     border-radius: 5px;
-    /* padding: 12px 24px; */
-    /* margin-top: 32px; */
     font-weight: 500;
 
     display: flex;
@@ -28,7 +26,6 @@ export const Container = styled.button`
     
     &:disabled {
         background: ${({ theme }) => theme.colors.tomato_400};
-        width: ${(prop) => prop.width ? prop.width : '172px' };
     }
 
     &:disabled:hover {
@@ -45,10 +42,6 @@ export const Container = styled.button`
                 width: 100%;
             }
         }
-    }
-
-    &.dark:hover {
-        /* border: 1px solid ${({ theme }) => theme.colors.light_100}; */
     }
 
     @media (max-width: 768px) {

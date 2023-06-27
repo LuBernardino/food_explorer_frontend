@@ -16,30 +16,33 @@ export function SignIn() {
 
     const { signIn } = useAuth();
     
-    async function handleSignIn() {
-        await signIn({ email, password });
+    function handleSignIn() {
+        signIn({ email, password });
     }
 
     return(
         <Main>
-            <Logo/>
+            <Logo id="logo"/>
             <Container>
                 <form onSubmit={e => { e.preventDefault(); handleSignIn(); }}>
                     <h1>Faça login</h1>
                     <Input
                         title='Email'
+                        required
                         placeholder='Exemplo: exemplo@exemplo.com.br'
                         type='email'
                         onChange={e => setEmail(e.target.value)}
                     />
                     <Input
                         title='Senha'
+                        required
                         placeholder='No mínimo 6 caracteres'
                         type='password'
                         onChange={e => setPassword(e.target.value)}
                     />
 
                     <Button
+                        width="100%"
                         title='Entrar'
                         type="submit"
                     />

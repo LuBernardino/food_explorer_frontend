@@ -10,6 +10,7 @@ export const Container = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
 
     > img {
         display: none;
@@ -24,7 +25,6 @@ export const Container = styled.div`
     }
 
     .menu {
-        /* height: 100vh; */
         border-radius: 12px;
         background-color: ${({ theme }) => theme.colors.dark_500};
         height: 0;
@@ -35,7 +35,6 @@ export const Container = styled.div`
 
     .menu.active {
         height: 100vh;
-        /* height: 500px; */
         opacity: 1;
         transition: 0.5s;
         visibility: visible;
@@ -52,10 +51,6 @@ export const Container = styled.div`
         
         > Button {
             display: none;
-        }
-
-        .search-menu {
-            /* display: none; */
         }
 
         .requests {
@@ -101,7 +96,6 @@ export const Container = styled.div`
             header {
                 display: flex;
                 background-color: ${({ theme }) => theme.colors.dark_700};
-                /* background-color: ${({ theme }) => theme.colors.dark_700}; */
                 padding: 56px 28px 24px 28px;
                 gap: 16px;
                 align-items: center;

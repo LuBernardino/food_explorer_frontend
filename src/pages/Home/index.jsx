@@ -1,11 +1,11 @@
+import { useState, useEffect } from "react";
 
-import { Navbar } from '../../components/navbar';
-import { Footer } from '../../components/footer';
-import { Card } from '../../components/Card';
-import { Container } from './styles';
-import FlavorImage from '../../assets/svg/flavorimage.svg'
-import DishParma from '../../assets/svg/DishParma.svg';
-import { useState, useEffect } from 'react';
+import { Navbar } from "../../components/navbar";
+import { Footer } from "../../components/footer";
+import { Card } from "../../components/Card";
+import { Container } from "./styles";
+import FlavorImage from "../../assets/svg/flavorimage.svg";
+import { api } from "../../services/api";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -15,79 +15,127 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper";
 
 export function Home() {
-    const sections = ['Refeições', 'Sobremesas', 'Bebidas'];
-    const slidesPerView = 4;
-    const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [search, setSearch] = useState("");
+  const [meals, setMeals] = useState([]);
+  const [desserts, setDesserts] = useState([]);
+  const [drinks, setDrinks] = useState([]);
+  const [cart, setCart] = useState(0);
 
-    const data = [
-        { id: 1, image: DishParma, title: 'Suco de Maracuja', description: 'Teste Teste', value: 10, favorite: false },
-        { id: 2, image: DishParma, title: 'Teste 2', description: 'Teste Teste', value: 10, favorite: false },
-        { id: 3, image: DishParma, title: 'Teste 3', description: 'Teste Teste', value: 10, favorite: true },
-        { id: 4, image: DishParma, title: 'Teste 4', description: 'Teste Teste', value: 10, favorite: false },
-        { id: 5, image: DishParma, title: 'Teste 5', description: 'Teste Teste', value: 10, favorite: false },
-        { id: 6, image: DishParma, title: 'Teste 6', description: 'Teste Teste', value: 10, favorite: true },
-        { id: 7, image: DishParma, title: 'Teste 7', description: 'Teste Teste', value: 10, favorite: false },
-        { id: 8, image: DishParma, title: 'Teste 8', description: 'Teste Teste', value: 10, favorite: false },
-        { id: 9, image: DishParma, title: 'Teste 9', description: 'Teste Teste', value: 10, favorite: true },
-        { id: 10, image: DishParma, title: 'Teste 10', description: 'Teste Teste', value: 10, favorite: false },
-        { id: 11, image: DishParma, title: 'Teste 11', description: 'Teste Teste', value: 10, favorite: false },
-        { id: 12, image: DishParma, title: 'Teste 12', description: 'Teste Teste', value: 10, favorite: true },
-        { id: 13, image: DishParma, title: 'Teste 13', description: 'Teste Teste', value: 10, favorite: false },
-        { id: 14, image: DishParma, title: 'Teste 14', description: 'Teste Teste', value: 10, favorite: false },
-        { id: 15, image: DishParma, title: 'Teste 15', description: 'Teste Teste', value: 10, favorite: true },
-    ];
+  function handleAddCart() {
+    setCart(prev => prev + 1);
+  }
 
+  function handleRemoveCart() {
+    setCart(prev => prev - 1);
+  }
 
-    useEffect(() => {
-        function handleResize() {
-            setIsMobile(window.innerWidth <= 768);
-        }
-        window.addEventListener('resize', handleResize);
-        handleResize();
+  function handleSearch(query) {
+    setSearch(query);
+  }
 
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, [])
+  useEffect(() => {
+    async function fetchDishes() {
+      const response = await api.get(`/dishes/?search=${search}`);
+      setMeals(response.data.filter((dish) => dish.category_id === 1));
+      setDesserts(response.data.filter((dish) => dish.category_id === 2));
+      setDrinks(response.data.filter((dish) => dish.category_id === 3));
+    }
 
-    return(
-        <Container>
-            <Navbar/>
+    fetchDishes();
+  }, [search]);
 
-            <img src={ FlavorImage } alt='imagem com macarrons' />
+  useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth <= 768);
+    }
+    window.addEventListener("resize", handleResize);
+    handleResize();
 
-            {sections.map((section, index) =>
-                (
-                    <div className='carrouselcards' key={index}>
-                        <h1>{section}</h1> 
-                        <div className='cards'>
-                            {/* <RxCaretLeft onClick={handlePrevious}/> */}
-                            <Swiper
-                                slidesPerView={isMobile ? 1.5 : 4}
-                                spaceBetween={isMobile ? 16 : 27}
-                                freeMode={true}
-                                navigation={!isMobile}
-                                loop={true}
-                                modules={[Navigation]}
-                                className="mySwiper"
-                                style={{
-                                    "--swiper-navigation-color": "white",
-                                    "--swiper-navigation-size": "27.5px",
-                                }}
-                            >
-                                {data.map(item => 
-                                    <SwiperSlide key={item.id}>
-                                        <Card dish={item} isMobile={isMobile}/>
-                                    </SwiperSlide>
-                                )}
-                            </Swiper>
-                            {/* <RxCaretRight onClick={handleNext}/> */}
-                        </div>
-                    </div>
-                )
-            )}
-            <Footer />
-        </Container>
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
-    )
+  return (
+    <Container>
+      <Navbar handleSearch={handleSearch} cart={cart}/>
+
+      <img src={FlavorImage} alt="imagem com macarrons" />
+
+      <div className="carrouselcards">
+        <h1>Refeições</h1>
+        <div className="cards">
+          <Swiper
+            slidesPerView={isMobile ? 1.5 : Math.min(meals.length, 3.9)}
+            spaceBetween={isMobile ? 16 : 27}
+            freeMode={true}
+            navigation={!isMobile}
+            loop={true}
+            modules={[Navigation]}
+            style={{
+              "--swiper-navigation-color": "white",
+              "--swiper-navigation-size": "27.5px",
+            }}
+          >
+            {meals.map((item) => (
+              <SwiperSlide key={item.id}>
+                <Card dish={item} isMobile={isMobile} handleAddCart={handleAddCart} handleRemoveCart={handleRemoveCart} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
+
+      <div className="carrouselcards">
+        <h1>Sobremesas</h1>
+        <div className="cards">
+          <Swiper
+            slidesPerView={isMobile ? 1.5 : Math.min(desserts.length, 3.9)}
+            spaceBetween={isMobile ? 16 : 27}
+            freeMode={true}
+            navigation={!isMobile}
+            loop={true}
+            modules={[Navigation]}
+            style={{
+              "--swiper-navigation-color": "white",
+              "--swiper-navigation-size": "27.5px",
+            }}
+          >
+            {desserts.map((item) => (
+              <SwiperSlide key={item.id}>
+                <Card dish={item} isMobile={isMobile} handleAddCart={handleAddCart} handleRemoveCart={handleRemoveCart} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
+
+      <div className="carrouselcards">
+        <h1>Bebidas</h1>
+        <div className="cards">
+          <Swiper
+            slidesPerView={isMobile ? 1.5 : Math.min(drinks.length, 3.9)}
+            spaceBetween={isMobile ? 16 : 27}
+            freeMode={true}
+            navigation={!isMobile}
+            loop={true}
+            modules={[Navigation]}
+            style={{
+              "--swiper-navigation-color": "white",
+              "--swiper-navigation-size": "27.5px",
+            }}
+          >
+            {drinks.map((item) => (
+              <SwiperSlide key={item.id}>
+                <Card dish={item} isMobile={isMobile} handleAddCart={handleAddCart} handleRemoveCart={handleRemoveCart} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
+
+      <Footer />
+    </Container>
+  );
 }

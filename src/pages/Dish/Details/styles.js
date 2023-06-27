@@ -22,12 +22,15 @@ export const Main = styled.div`
     > img {
         height: 390px;
         width: 390px;
+        border-radius: 50%;
     }
 
     .dishinfo {
         display: flex;
         flex-direction: column;
         gap: 24px;
+
+        width: 687px;
 
         h1 {
             font-family: 'Poppins', sans-serif;
@@ -39,6 +42,7 @@ export const Main = styled.div`
             font-family: 'Poppins', sans-serif;
             font-size: 24px;
             font-weight: 400;
+            word-break: break-all;
         }
     }
 

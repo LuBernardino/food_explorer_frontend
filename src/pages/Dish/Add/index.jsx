@@ -1,131 +1,201 @@
-// import { api } from '../../services/api';
-// import { Link } from 'react-router-dom';
-// import { useParams } from "react-router-dom";
-// import { useNavigate } from 'react-router-dom';
-import { useState, useEffect, useRef } from "react";
-import { Input } from "../../../components/Input";
+import { useState, useEffect } from "react";
+import { api } from '../../../services/api';
+import { useNavigate } from 'react-router-dom';
 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { Container, Form, Dish, Ingredient, Buttons } from "./styles";
+
+import { Input } from "../../../components/Input";
 import { Button } from "../../../components/Button";
 import { ButtonUploadFile } from "../../../components/ButtonUploadFile";
 import { Dropdown } from "../../../components/Dropdown";
-
 import { Footer } from "../../../components/footer";
 import { Navbar } from "../../../components/navbar";
-import { Tag } from "../../../components/tag";
-import { Container, Main, Dish, Ingredient, Buttons } from './styles';
-import { Count } from "../../../components/Count";
 import { TogoBack } from "../../../components/togoback";
 import { Textarea } from "../../../components/Textarea";
 
-import UploadSimple from '../../../assets/svg/UploadSimple.svg';
+import UploadSimple from "../../../assets/svg/UploadSimple.svg";
 import { IngredientTag } from "../../../components/IngredientTag";
 
-
-// // INGREDIENTS 
-
-
-// //INGREDIENTS ADD AND REMOVE
-
-
-
-
 export function DishAdd() {
+  const [ingredients, setIngredients] = useState([]);
+  const [newIngredient, setNewIngredient] = useState("");
 
-    const [ingredients, setIngredients] = useState(['Cebola','Alface', 'Pimenta']);
-    const [newIngredient, setNewIngredient] = useState("");
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState(1);
+  const [categories, setCategories] = useState([]);
 
-    function handleAddIngredients() {
-        setIngredients(prevState => [...prevState, newIngredient]);
-        setNewIngredient("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function getCategories() {
+        const categories = await api.get('/categories');
+        setCategories(categories.data);
     }
 
-    function handleRemoveIngredients(deleted) {
-        setIngredients(prevState => prevState.filter(ingredient => ingredient !== deleted));
+    getCategories();
+
+  }, []);
+
+  async function addDish() {
+    const notANumber = isNaN(price) || price === "";
+
+    if (price < 0 || notANumber) {
+        return toast.warn(
+          `Preencha o campo preço com um valor válido!`
+        );
+      }
+
+    if (!name) {
+      return;
     }
 
-    const categories = [{
-        id: 1,
-        title: 'Refeição'
-    },
-    {
-        id: 2,
-        title: 'Sobremesas',
-    },
-    {
-        id: 3,
-        title: 'Bebidas',
-    }]
+    if (newIngredient != "") {
+      return toast.warn(
+        `Clique no + para adicionar o ingrediente tag: ${newIngredient}. ou limpe o campo!`
+      );
+    }
 
+    if (ingredients.length === 0) {
+      return toast.warn("Informe ao menos o ingrediente principal do prato!");
+    }
 
+    const response = await api.post('/dishes', {
+      name,
+      category_id: category,
+      price: parseFloat(price),
+      description,
+      ingredients
+    }).catch(error => {
+        if(error.response) {
+            toast.error(error.response.data.message);
+        } else {
+            toast.error("Não foi possível cadastrar");
+        }
+    });
 
-    return (
-      <Container>
-        <Navbar />
+    const id = response.data.id;
 
-        <TogoBack/>
+    if (image) {
+      const fileUploadForm = new FormData();
+      fileUploadForm.append('image', image);
 
-        <Main>
+      await api.patch(`dishes/image/${id}`, fileUploadForm);
+    }
 
-            <h1>Adicionar prato</h1>
-            <Dish>
-                
-                <ButtonUploadFile icon={UploadSimple} width="229px" title='Imagem do Prato'/>
- 
-                <Input
-                    type='text'
-                    title='Nome'
-                    placeholder='Ex: Salada Ceasar'
+    toast.success('Prato adicionado!');
+    setName('');
+    setIngredients([]);
+    setPrice(0);
+    setDescription('');
+
+    navigate("/");
+  }
+
+  function handleUploadImage(event) {
+    const file = event.target.files[0];
+    setImage(file);
+  }
+
+  function handleAddIngredients() {
+    setIngredients((prevState) => [...prevState, newIngredient]);
+    setNewIngredient("");
+  }
+
+  function handleRemoveIngredients(deleted) {
+    setIngredients((prevState) =>
+      prevState.filter((ingredient) => ingredient !== deleted)
+    );
+  }
+
+  return (
+    <Container>
+      <ToastContainer />
+      <Navbar />
+
+      <TogoBack onClick={() => navigate("/")}/>
+
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          addDish();
+        }}
+      >
+        <h1>Adicionar prato</h1>
+        <Dish>
+          <ButtonUploadFile
+            onChange={handleUploadImage}
+            icon={UploadSimple}
+            width="229px"
+            title="Imagem do Prato"
+          />
+
+          <Input
+            required
+            type="text"
+            title="Nome"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Ex: Salada Ceasar"
+          />
+
+          <Dropdown
+            options={categories}
+            onChange={(e) => setCategory(e.target.value)}
+            title="Categoria"
+            placeholder="Refeição"
+          />
+        </Dish>
+
+        <Ingredient>
+          <div className="add-new-ingredients">
+            <h1>Ingredientes</h1>
+            <div className="ingredients">
+              {ingredients.map((ingredient, index) => (
+                <IngredientTag
+                  key={index}
+                  value={ingredient}
+                  isNew={false}
+                  onClick={() => handleRemoveIngredients(ingredient)}
                 />
+              ))}
+              <IngredientTag
+                isNew={true}
+                value={newIngredient}
+                onClick={handleAddIngredients}
+                onChange={(e) => setNewIngredient(e.target.value)}
+              />
+            </div>
+          </div>
 
-                <Dropdown
-                    options={categories}
-                    title='Categoria'
-                    placeholder='Refeição'
-                />
-            </Dish>
+          <Input
+            required
+            title="Preço"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            placeholder="R$ 00,00"
+          />
+        </Ingredient>
 
+        <Textarea
+          required
+          title="Descrição"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"
+        />
 
-            <Ingredient>
-                <div className="add-new-ingredients">
-                    <h1>Ingredientes</h1>
-                    <div className="ingredients">
-                        {
-                            ingredients.map((ingredient, index) => 
-                                (<IngredientTag 
-                                    key={index} 
-                                    value={ingredient} 
-                                    isNew={false} 
-                                    onClick={() => handleRemoveIngredients(ingredient)} />)
-                            )
-                        }
-                        <IngredientTag isNew={true} 
-                            value={newIngredient}
-                            onClick={handleAddIngredients} 
-                            onChange={e => setNewIngredient(e.target.value)}/>
-                    </div>
-                </div>
+        <Buttons>
+          <Button type="submit" title="Salvar alterações" />
+        </Buttons>
+      </Form>
 
-                <Input 
-                    title='Preço'
-                    placeholder='R$ 00,00'
-                />
-            </Ingredient>
-
-            <Textarea
-                title='Descrição'
-                placeholder='Fale brevemente sobre o prato, seus ingredientes e composição'
-            />
-
-            <Buttons>
-                <Button
-                    disabled
-                    title='Salvar alterações'
-                />
-            </Buttons>
-
-        </Main>
-
-        <Footer />
+      <Footer />
     </Container>
   );
 }

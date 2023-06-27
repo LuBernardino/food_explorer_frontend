@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
 `;
 
-export const Main = styled.div`
+export const Form = styled.form`
     margin: 0 90px 0 150px;
 
     > h1 {
@@ -83,5 +83,3 @@ export const Buttons = styled.div`
         justify-content: center;
     }
 `;
-
-// export const Description = styled.div``;
