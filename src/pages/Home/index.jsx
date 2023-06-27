@@ -4,7 +4,7 @@ import { Navbar } from "../../components/Navbar";
 import { Footer } from "../../components/Footer";
 import { Card } from "../../components/Card";
 import { Container } from "./styles";
-import FlavorImage from "../../assets/svg/Flavorimage.svg";
+import FlavorImage from "../../assets/svg/FlavorImage.svg";
 import { api } from "../../services/api";
 
 import { Swiper, SwiperSlide } from "swiper/react";
